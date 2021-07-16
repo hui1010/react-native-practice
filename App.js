@@ -11,9 +11,11 @@ export default function App() {
 
   return (
     <View style={styles.container}>
-      <Text>{number}</Text>
+      <Text style={styles.name}>{number}</Text>
       {/* <Button title='Click me' onPress={()=>{Linking.openURL('https://github.com/')}}></Button> */}
-      <Button title='add' onPress={handlePress}></Button>
+      <View style={styles.button}>
+      <Button title='add' onPress={handlePress} style={styles.button}></Button>
+      </View>
       <StatusBar style="auto" />
     </View>
   );
@@ -26,4 +28,14 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
+  name: {
+    color: `#ff8c00`
+  },
+  button: {
+    width: 80,
+    height: 40,
+    borderWidth: 2,
+    borderColor: `#7fffd4`,
+    marginTop: 10
+  }
 });
