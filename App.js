@@ -1,6 +1,8 @@
 import { StatusBar } from 'expo-status-bar';
 import React, { useState } from 'react';
 import { StyleSheet, Text, View, TextInput, SafeAreaView, Keyboard, Pressable, Modal, Image, ImageBackground } from 'react-native';
+import Header from './src/Header';
+import MyButton from './src/CustomButton';
 
 export default function App() {
 
@@ -24,6 +26,7 @@ export default function App() {
       source={{uri: 'https://cdn.vox-cdn.com/uploads/chorus_asset/file/21694164/VRG_WP_Pixel4a.0.jpg'}}
     >
       <SafeAreaView>
+        <Header />
         <Modal
           visible={showWarning}
           transparent // Modal background is white by default
@@ -56,21 +59,8 @@ export default function App() {
           placeholder='e.g. Huiyi'
           onChangeText={value => setName(value)}  
           />
-    
-
-        <Pressable
-          style={({pressed})=> [
-            {backgroundColor: pressed? '#ddd' : '#20b2aa'},
-            styles.button
-          ]}
-          onPress={onPressHandler}
-          // delayLongPress={2000}
-          hitSlop={{top: 10, bottom: 10, right: 10, left: 10}}
-          // disabled={submitted}
-          android_ripple={{color: '#90ee90'}}
-        >
-          <Text style={styles.text}>{submitted ? 'Clear' : 'Submit'}</Text>
-        </Pressable>
+        <MyButton onPresFunction={onPressHandler} title={submitted ? 'Clear' : 'Submit'}/>
+        <MyButton onPresFunction={onPressHandler} title='Test' style={{margin: 10}}/>
 
         {
           submitted ? 
