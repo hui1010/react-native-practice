@@ -1,6 +1,6 @@
 import { StatusBar } from 'expo-status-bar';
 import React, { useState } from 'react';
-import { StyleSheet, Text, View, TextInput, SafeAreaView, Keyboard, TouchableWithoutFeedback, Button } from 'react-native';
+import { StyleSheet, Text, View, TextInput, SafeAreaView, Keyboard, TouchableWithoutFeedback, Button, TouchableOpacity, TouchableHighlight } from 'react-native';
 
 export default function App() {
 
@@ -36,12 +36,28 @@ export default function App() {
           // editable={false} // Won't be able to type
           // secureTextEntry
           />
-        <Button 
+        {/* <Button 
           title= {submitted ? 'Clear' : 'Submit'}
           onPress={onPressHandler}
           disabled={submitted}
           color='#20b2aa'
-        />
+        /> */}
+
+        <TouchableOpacity
+          style={styles.button}
+          onPress={onPressHandler}
+          activeOpacity={0.5}
+        >
+          <Text style={styles.text}>{submitted ? 'Clear' : 'Submit'}</Text>
+        </TouchableOpacity>
+
+        {/* <TouchableHighlight
+          style={styles.button}
+          onPress={onPressHandler}
+          underlayColor='#e0ffff'
+        >
+          <Text style={styles.text}>{submitted ? 'Clear' : 'Submit'}</Text>
+        </TouchableHighlight> */}
         {
           submitted ? 
             <Text style={styles.text}>
@@ -76,5 +92,11 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     fontSize: 20,
     marginBottom: 10
+  },
+  button: {
+    backgroundColor: '#20b2aa',
+    width: 150,
+    height: 50,
+    alignItems: 'center',
   }
 });
