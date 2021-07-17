@@ -1,6 +1,6 @@
 import { StatusBar } from 'expo-status-bar';
 import React, { useState } from 'react';
-import { StyleSheet, Text, View, TextInput, SafeAreaView, Keyboard, TouchableWithoutFeedback, Button, TouchableOpacity, TouchableHighlight, Pressable } from 'react-native';
+import { StyleSheet, Text, View, TextInput, SafeAreaView, Keyboard, TouchableWithoutFeedback, Button, TouchableOpacity, TouchableHighlight, Pressable, Alert } from 'react-native';
 
 export default function App() {
 
@@ -14,8 +14,19 @@ export default function App() {
   const [submitted, setSubmitted] = useState(false)
 
   const onPressHandler = () => {
-    setSubmitted(!submitted)
-    Keyboard.dismiss()
+    if(name.length > 3) {
+      setSubmitted(!submitted)
+      Keyboard.dismiss()
+    } else {
+      // 1st parameter - title, 2nd parameter - main text, 3rd parameter - buttons, 4th? - options
+      Alert.alert('Warning', 'The name must be more than 3 letters long', 
+        [{text: 'Do not show again', onPress: () => console.warn('Do not show Pressed'), style:'destructive'},
+        {text: 'Cancel', onPress: () => console.warn('Cancel Pressed'), style:'destructive'},
+        {text: 'OK', onPress: () => console.warn('OK Pressed'), style:'destructive'}],
+        {cancelable: true, onDismiss: () => console.warn('Alert dismissed')}// only for Android
+      )
+    }
+    
   }
 
   return (   
