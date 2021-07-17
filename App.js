@@ -1,6 +1,6 @@
 import { StatusBar } from 'expo-status-bar';
 import React, { useState } from 'react';
-import { StyleSheet, Text, View, TextInput, SafeAreaView, Keyboard, Pressable, Alert, Modal } from 'react-native';
+import { StyleSheet, Text, View, TextInput, SafeAreaView, Keyboard, Pressable, Alert, Modal, Image } from 'react-native';
 
 export default function App() {
 
@@ -71,11 +71,24 @@ export default function App() {
 
         {
           submitted ? 
-            <Text style={styles.text}>
-              You are registed as: {name} 
-            </Text> 
+            <View style={styles.body}>
+              <Text style={styles.text}>
+                You are registed as: {name} 
+              </Text> 
+              <Image 
+                style={styles.image}
+                source={require('./assets/done.jpg')}
+                resizeMode='stretch'
+              />
+            </View>
+            
             :
-            null
+            <Image 
+              style={styles.image}
+              source={require('./assets/warning.png')}
+              resizeMode='stretch'
+              // blurRadius={5} // to blur the image
+            />
         }
 
       </SafeAreaView>
@@ -140,5 +153,10 @@ const styles = StyleSheet.create({
     backgroundColor: `#98fb98`,
     borderBottomLeftRadius: 20,
     borderBottomRightRadius: 20,
+  },
+  image: {
+    width: 100,
+    height: 100,
+    margin: 10
   }
 });
