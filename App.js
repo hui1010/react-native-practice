@@ -1,32 +1,71 @@
 import { StatusBar } from 'expo-status-bar';
 import React, { useState } from 'react';
-import { StyleSheet, Text, View, Button, Linking, ScrollView, SafeAreaView, RefreshControl } from 'react-native';
+import { StyleSheet, Text, View, ScrollView, SafeAreaView, RefreshControl, FlatList } from 'react-native';
 
 export default function App() {
  
   const [Items, setItems] = useState([
-    {key: 1, item: 'Item 1'},
-    {key: 2, item: 'Item 2'},
-    {key: 3, item: 'Item 3'},
-    {key: 4, item: 'Item 4'},
-    {key: 5, item: 'Item 5'},
-    {key: 6, item: 'Item 6'},
-    {key: 7, item: 'Item 7'},
-    {key: 8, item: 'Item 8'},
-    {key: 9, item: 'Item 9'}
+    {item: 'Item 1'},
+    {item: 'Item 2'},
+    {item: 'Item 3'},
+    {item: 'Item 4'},
+    {item: 'Item 5'},
+    {item: 'Item 6'},
+    {item: 'Item 7'},
+    {item: 'Item 8'},
+    {item: 'Item 9'}
   ])
 
   const [Refreshing, setRefreshing] = useState(false)
 
   const onRefresh = () => {
     setRefreshing(true)
-    setItems([...Items, {key: 69, item: 'New added'}])
+    setItems([...Items, {item: 'New added'}])
     setRefreshing(false)
   }
 
+  const DATA = [
+    {
+      titel: 'Title 1',
+      data: ['Item 1-1', 'Item 1-2', 'Item 1-3']
+    }, 
+    {
+      titel: 'Title 12',
+      data: ['Item 2-1', 'Item 2-2', 'Item 2-3']
+    }, 
+    {
+      titel: 'Title 3',
+      data: ['Item 3-1', 'Item 3-2', 'Item 3-3']
+    }, 
+    {
+      titel: 'Title 4',
+      data: ['Item 4-1', 'Item 4-2', 'Item 4-3']
+    }, 
+  ]
+
   return (
      <SafeAreaView > 
-      <ScrollView 
+       <FlatList 
+        style={styles.container}
+        keyExtractor={(item, index) => String(index)}
+        //  numColumns={2} 
+        // horizontal
+        // inverted //default: left ->right, inverted: right -> left
+        data={Items}
+        renderItem={ ({item})=> (
+              <View style={styles.item}>
+                <Text style={styles.text}>{item.item}</Text>
+              </View>
+            )
+        }
+        refreshControl={
+          <RefreshControl 
+            refreshing={Refreshing}
+            onRefresh={onRefresh}
+          />
+        }       
+       />
+      {/* <ScrollView 
         style={styles.container}
         refreshControl={
           <RefreshControl 
@@ -38,14 +77,14 @@ export default function App() {
       >
       {
         Items.map((item) => {
-          return [
+          return (
             <View style={styles.item} key={item.key}>
               <Text style={styles.text}>{item.item}</Text>
             </View>
-          ]
+          )
         })
       }
-      </ScrollView>
+      </ScrollView> */}
       <StatusBar style="auto" />
      </SafeAreaView> 
   );
@@ -58,7 +97,7 @@ const styles = StyleSheet.create({
   },
   item: {
     backgroundColor: `#add8e6`,
-    width: '100%',
+    // width: '100%',
     height: 60,
     margin: 5,
     alignItems: 'center',
