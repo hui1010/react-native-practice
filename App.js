@@ -13,7 +13,7 @@ export default function App() {
   const [name, setName] = useState('')
 
   return (   
-  <DismissKeyboard>
+  // <DismissKeyboard>
     <View style={styles.body}>
       <SafeAreaView>
         <Text style={styles.text}>
@@ -24,7 +24,7 @@ export default function App() {
           // multiline
           style={styles.input} 
           placeholder='e.g. Huiyi'
-          // onChangeText={value => setName(value)}  
+          onChangeText={value => setName(value)}  
           // keyboardType='numeric'
           maxLength={5}
           // editable={false} // Won't be able to type
@@ -37,7 +37,7 @@ export default function App() {
         </Text> 
       </SafeAreaView>
     </View>  
-  </DismissKeyboard>
+  // </DismissKeyboard>
   );
 }
 
