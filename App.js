@@ -1,6 +1,6 @@
 import { StatusBar } from 'expo-status-bar';
 import React, { useState } from 'react';
-import { StyleSheet, Text, View, ScrollView, SafeAreaView, RefreshControl, FlatList } from 'react-native';
+import { StyleSheet, Text, View, ScrollView, SafeAreaView, RefreshControl, FlatList, SectionList } from 'react-native';
 
 export default function App() {
  
@@ -20,32 +20,49 @@ export default function App() {
 
   const onRefresh = () => {
     setRefreshing(true)
-    setItems([...Items, {item: 'New added'}])
+    // setItems([...Items, {item: 'New added'}])
+    const adding = DATA.length + 1
+    setDATA([...DATA, {
+      title: `Title ${adding}`,
+      data: [`Item ${adding}-1`, `Item ${adding}-2`, `Item ${adding}-3`]
+    }
+  ])
     setRefreshing(false)
   }
 
-  const DATA = [
-    {
-      titel: 'Title 1',
-      data: ['Item 1-1', 'Item 1-2', 'Item 1-3']
-    }, 
-    {
-      titel: 'Title 12',
-      data: ['Item 2-1', 'Item 2-2', 'Item 2-3']
-    }, 
-    {
-      titel: 'Title 3',
-      data: ['Item 3-1', 'Item 3-2', 'Item 3-3']
-    }, 
-    {
-      titel: 'Title 4',
-      data: ['Item 4-1', 'Item 4-2', 'Item 4-3']
-    }, 
-  ]
-
+  const [DATA, setDATA]  = useState( 
+    [
+      {
+        title: `Title 1`,
+        data: [`Item 1-1`, `Item 1-2`, `Item 1-3`]
+      } 
+    ]
+  )
   return (
      <SafeAreaView > 
-       <FlatList 
+       <SectionList 
+        style={styles.container}
+        keyExtractor={(item, index) => String(index)}
+        sections = {DATA} 
+        renderItem={({item}) => (
+          
+            <Text style={styles.text}>{item}</Text>
+                    
+        )}
+        renderSectionHeader={({section}) => (
+          <View style={styles.item}>
+            <Text style={styles.text}>{section.title}</Text>
+          </View>
+        )}  
+        refreshControl={
+         <RefreshControl 
+          Refreshing={Refreshing}
+          onRefresh={onRefresh}
+          />
+        }
+       />
+
+       {/* <FlatList 
         style={styles.container}
         keyExtractor={(item, index) => String(index)}
         //  numColumns={2} 
@@ -64,7 +81,7 @@ export default function App() {
             onRefresh={onRefresh}
           />
         }       
-       />
+       /> */}
       {/* <ScrollView 
         style={styles.container}
         refreshControl={
