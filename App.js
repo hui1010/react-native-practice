@@ -1,6 +1,6 @@
 import { StatusBar } from 'expo-status-bar';
 import React, { useState } from 'react';
-import { StyleSheet, Text, View, TextInput, SafeAreaView, Keyboard, TouchableWithoutFeedback } from 'react-native';
+import { StyleSheet, Text, View, TextInput, SafeAreaView, Keyboard, TouchableWithoutFeedback, Button } from 'react-native';
 
 export default function App() {
 
@@ -11,6 +11,12 @@ export default function App() {
   )
 
   const [name, setName] = useState('')
+  const [submitted, setSubmitted] = useState(false)
+
+  const onPressHandler = () => {
+    setSubmitted(!submitted)
+    Keyboard.dismiss()
+  }
 
   return (   
   // <DismissKeyboard>
@@ -30,11 +36,21 @@ export default function App() {
           // editable={false} // Won't be able to type
           // secureTextEntry
           />
-        
+        <Button 
+          title= {submitted ? 'Clear' : 'Submit'}
+          onPress={onPressHandler}
+          disabled={submitted}
+          color='#20b2aa'
+        />
+        {
+          submitted ? 
+            <Text style={styles.text}>
+              You are registed as: {name} 
+            </Text> 
+            :
+            null
+        }
 
-        <Text style={styles.text}>
-          Your name is: {name} 
-        </Text> 
       </SafeAreaView>
     </View>  
   // </DismissKeyboard>
@@ -58,6 +74,7 @@ const styles = StyleSheet.create({
     borderColor: `#f5f5dc`,
     borderRadius: 5,
     textAlign: 'center',
-    fontSize: 20
+    fontSize: 20,
+    marginBottom: 10
   }
 });
