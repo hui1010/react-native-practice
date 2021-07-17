@@ -1,6 +1,6 @@
 import { StatusBar } from 'expo-status-bar';
 import React, { useState } from 'react';
-import { StyleSheet, Text, View, TextInput, SafeAreaView, Keyboard, Pressable, Alert, Modal, Image } from 'react-native';
+import { StyleSheet, Text, View, TextInput, SafeAreaView, Keyboard, Pressable, Modal, Image, ImageBackground } from 'react-native';
 
 export default function App() {
 
@@ -19,7 +19,10 @@ export default function App() {
   }
 
   return (   
-    <View style={styles.body}>
+    <ImageBackground 
+      style={styles.body} 
+      source={{uri: 'https://cdn.vox-cdn.com/uploads/chorus_asset/file/21694164/VRG_WP_Pixel4a.0.jpg'}}
+    >
       <SafeAreaView>
         <Modal
           visible={showWarning}
@@ -92,14 +95,13 @@ export default function App() {
         }
 
       </SafeAreaView>
-    </View>  
+    </ImageBackground>  
   );
 }
 
 const styles = StyleSheet.create({
   body: {
     flex: 1,
-    backgroundColor: '#fff',
     alignItems: 'center',
   },
   text: {
