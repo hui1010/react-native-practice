@@ -27,37 +27,11 @@ export default function App() {
         </Text> 
       
         <TextInput 
-          // multiline
           style={styles.input} 
           placeholder='e.g. Huiyi'
           onChangeText={value => setName(value)}  
-          // keyboardType='numeric'
-          maxLength={5}
-          // editable={false} // Won't be able to type
-          // secureTextEntry
           />
-        {/* <Button 
-          title= {submitted ? 'Clear' : 'Submit'}
-          onPress={onPressHandler}
-          disabled={submitted}
-          color='#20b2aa'
-        /> */}
-
-        {/* <TouchableOpacity
-          style={styles.button}
-          onPress={onPressHandler}
-          activeOpacity={0.5}
-        >
-          <Text style={styles.text}>{submitted ? 'Clear' : 'Submit'}</Text>
-        </TouchableOpacity> */}
-
-        {/* <TouchableHighlight
-          style={styles.button}
-          onPress={onPressHandler}
-          underlayColor='#e0ffff'
-        >
-          <Text style={styles.text}>{submitted ? 'Clear' : 'Submit'}</Text>
-        </TouchableHighlight> */}
+    
 
         <Pressable
           style={({pressed})=> [
