@@ -1,11 +1,14 @@
 import React, { useState } from 'react';
 import { StyleSheet, View, Text, Pressable } from 'react-native';
 
-function ScreenB({navigation}) {
+function ScreenB({navigation, route}) {
+
+    const {ItemName, ItemId} = route.params
 
     const onPressHandler = () => {
-      navigation.navigate("Screen_A")
+      navigation.navigate("Screen_A", {Message: 'Message to Screen A from Screen B'})
       // navigation.goBack() 
+    //   navigation.setParams({ItemId: 29})
     }
   
     return(
@@ -16,6 +19,8 @@ function ScreenB({navigation}) {
           onPress={onPressHandler}
         >
           <Text>Go to screen A</Text>
+          <Text style={styles.text}>{ItemName}</Text>
+          <Text style={styles.text}>ID: {ItemId}</Text>
         </Pressable>
       </View>
     )

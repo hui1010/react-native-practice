@@ -18,7 +18,7 @@ function  App() {
   return (
     <NavigationContainer>
       <Drawer.Navigator
-        initialRouteName="Screen_B"
+        // initialRouteName="Screen_B"
         // drawerPosition='right' //by default it is left
         drawerType='back' // back front permanent slide, default is front, opening the menu in front of the screen
         edgeWidth={100} // decides where you can start drawing out the menu, 100 from the left side of the screen
@@ -58,6 +58,7 @@ function  App() {
         <Drawer.Screen
           name="Screen_B"
           component = {ScreenB}
+          initialParams={{ItemName: 'Item from Drawer', ItemId: 12}}
         />
 
         

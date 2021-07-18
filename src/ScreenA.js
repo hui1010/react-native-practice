@@ -1,14 +1,12 @@
 import React, { useState } from 'react';
 import { StyleSheet, View, Text, Pressable } from 'react-native';
 
-function ScreenA({navigation}) {
+function ScreenA({navigation, route}) {
 
     const onPressHandler = () => {
-    //   navigation.navigate("Screen_B") // name of the screen
+        navigation.navigate("Screen_B") // first parameter - name of the screen
       // navigation.replace("Screen_B") // the current screen will be replaced by Scrren_B in stack, the current will exist from stack, can't be accessed by goBack() 
-    //   navigation.openDrawer()
-    //   navigation.closeDrawer()
-      navigation.toggleDrawer()
+    
     }
   
     return(
@@ -18,7 +16,8 @@ function ScreenA({navigation}) {
           style={({pressed}) => ({backgroundColor: pressed? '#ddd':"#0f0"})}
           onPress={onPressHandler}
         >
-          <Text>Toggle Drawer</Text>
+          <Text>Go to Screen B</Text>
+          <Text>{route.params?.Message}</Text>
         </Pressable>
       </View>
     )
