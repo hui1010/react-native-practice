@@ -12,9 +12,9 @@ import { FontAwesome5 } from '@expo/vector-icons'
 import ScreenA from './src/ScreenA'
 import ScreenB from './src/ScreenB'
 
-// const Tab = createBottomTabNavigator()
+const Tab = createBottomTabNavigator()
 // const Tab = createMaterialBottomTabNavigator()
-const Tab = createMaterialTopTabNavigator()
+// const Tab = createMaterialTopTabNavigator()
 
 function  App() {
 
