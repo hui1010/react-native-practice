@@ -1,81 +1,76 @@
 import { StatusBar } from 'expo-status-bar';
 import React, { useState } from 'react';
-import { StyleSheet, View, Text, Pressable } from 'react-native';
+import { StyleSheet, View, Text, Pressable, SafeAreaView } from 'react-native';
 import { NavigationContainer  } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
+import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
 
-const Stack = createStackNavigator()
+import { FontAwesome5 } from '@expo/vector-icons'
 
-function ScreenA({navigation}) {
+import ScreenA from './src/ScreenA'
+import ScreenB from './src/ScreenB'
 
-  const onPressHandler = () => {
-    navigation.navigate("Screen_B") // name of the screen
-    // navigation.replace("Screen_B") // the current screen will be replaced by Scrren_B in stack, the current will exist from stack, can't be accessed by goBack() 
-  }
-
-  return(
-    <View style={styles.body}>
-      <Text style={styles.text}>ScreenA</Text>
-      <Pressable 
-        style={({pressed}) => ({backgroundColor: pressed? '#ddd':"#0f0"})}
-        onPress={onPressHandler}
-      >
-        <Text>Go to screen B</Text>
-      </Pressable>
-    </View>
-  )
-}
-function ScreenB({navigation}) {
-
-  const onPressHandler = () => {
-    navigation.navigate("Screen_A")
-    // navigation.goBack() 
-  }
-
-  return(
-    <View style={styles.body}>
-      <Text style={styles.text}>ScreenB</Text>
-      <Pressable 
-        style={({pressed}) => ({backgroundColor: pressed? '#ddd':"#0f0"})}
-        onPress={onPressHandler}
-      >
-        <Text>Go to screen A</Text>
-      </Pressable>
-    </View>
-  )
-}
-function ScreenC() {
-  return(
-    <View style={styles.body}>
-      <Text style={styles.text}>ScreenC</Text>
-    </View>
-  )
-}
-
+// const Tab = createBottomTabNavigator()
+// const Tab = createMaterialBottomTabNavigator()
+const Tab = createMaterialTopTabNavigator()
 
 function  App() {
 
   return (
     <NavigationContainer>
-      <Stack.Navigator
-        screenOptions={{
-          header: () => null
+      <Tab.Navigator
+        screenOptions={(route) =>({
+          tabBarIcon: (focused, size, color) => {
+            let iconName 
+            const name = route.name
+            if(route.name === "Screen_A") {
+              iconName='autoprefixer'
+              // size = focused ? 25 : 20
+              // color = focused ? '#f8f' : '#555'
+            } else {
+              iconName='btc'
+              // size = foused? 25 : 20
+              // color = focused ? '#f8f' : '#555'
+            } 
+            return (
+              <FontAwesome5 
+                name={iconName}
+                // size={size}
+                // color={color}
+              />
+            )
+          }
+        })}
+        tabBarOptions={{
+          activeTintColor:'#f8f',
+          inactiveTintColor: '#555',
+          activeBackgroundColor: '#fff',
+          inactiveBackgroundColor: '#999',
+          // showLabel: false, //the name
+          labelStyle: {fontSize: 14},
+          showIcon: true
         }}
+
+        //For material bottom tab bars
+        activeColor= '#f8edf6' //name's color, not icon's color
+        inactiveColor= '#3e2465'
+        barStyle={{backgroundColor: '#694fad'}} // the whole bar
       >
-        <Stack.Screen
+        <Tab.Screen
           name="Screen_A"
           component = {ScreenA}
-          options={{
-            header: ()=> null
-          }}
+          options={{tabBarBadge: 3}}
         />
-        <Stack.Screen
+        <Tab.Screen
           name="Screen_B"
           component = {ScreenB}
         />
 
         
-      </Stack.Navigator>
+      </Tab.Navigator>
+
     </NavigationContainer>
   )
 }
