@@ -2,75 +2,66 @@ import { StatusBar } from 'expo-status-bar';
 import React, { useState } from 'react';
 import { StyleSheet, View, Text, Pressable, SafeAreaView } from 'react-native';
 import { NavigationContainer  } from '@react-navigation/native';
-import { createStackNavigator } from '@react-navigation/stack';
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
-import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
+
+
+import { createDrawerNavigator } from '@react-navigation/drawer';
 
 import { FontAwesome5 } from '@expo/vector-icons'
 
 import ScreenA from './src/ScreenA'
 import ScreenB from './src/ScreenB'
 
-// const Tab = createBottomTabNavigator()
-// const Tab = createMaterialBottomTabNavigator()
-const Tab = createMaterialTopTabNavigator()
+const Drawer = createDrawerNavigator()
 
 function  App() {
 
   return (
     <NavigationContainer>
-      <Tab.Navigator
-        screenOptions={(route) =>({
-          tabBarIcon: (focused, size, color) => {
-            let iconName 
-            const name = route.name
-            if(route.name === "Screen_A") {
-              iconName='autoprefixer'
-              // size = focused ? 25 : 20
-              // color = focused ? '#f8f' : '#555'
-            } else {
-              iconName='btc'
-              // size = foused? 25 : 20
-              // color = focused ? '#f8f' : '#555'
-            } 
-            return (
-              <FontAwesome5 
-                name={iconName}
-                // size={size}
-                // color={color}
-              />
-            )
-          }
-        })}
-        tabBarOptions={{
-          activeTintColor:'#f8f',
-          inactiveTintColor: '#555',
-          activeBackgroundColor: '#fff',
-          inactiveBackgroundColor: '#999',
-          // showLabel: false, //the name
-          labelStyle: {fontSize: 14},
-          showIcon: true
+      <Drawer.Navigator
+        initialRouteName="Screen_B"
+        // drawerPosition='right' //by default it is left
+        drawerType='back' // back front permanent slide, default is front, opening the menu in front of the screen
+        edgeWidth={100} // decides where you can start drawing out the menu, 100 from the left side of the screen
+        hideStatusBar={true} // hide the top bar when the menu is open, by default it is not hidden
+        overlayColor='#ffb6c180' // color for the main screen once you start drawing out the menu, from transparent to this color
+        drawerStyle={{
+          backgroundColor: '#ffe4c4',
+          width: 150
         }}
-
-        //For material bottom tab bars
-        activeColor= '#f8edf6' //name's color, not icon's color
-        inactiveColor= '#3e2465'
-        barStyle={{backgroundColor: '#694fad'}} // the whole bar
+        screenOptions={{
+          headerShown: true, // will make a hamburger menu and show the screen title
+          // swipeEnabled: false, // now can Not draw out the menu
+          // gestureEnabled: false, // if touch outside of the menu, it will Not close
+          swipeEnabled: true, 
+          gestureEnabled: true, 
+          headerTitleAlign: 'left', //default is center
+          headerStyle: {
+            backgroundColor: '#7fffd4'
+          },
+          headerTintColor: '#008b8b', // header title text and hambugare color
+          headerTitleStyle: { // style for header title text
+            fontSize: 25,
+            fontWeight: 'bold'
+          }
+        }}
       >
-        <Tab.Screen
+        <Drawer.Screen
           name="Screen_A"
           component = {ScreenA}
-          options={{tabBarBadge: 3}}
+          options={{
+            title:'Screen_A title', // will be shown in the menu
+            drawerIcon: ({focused}) => (
+              <FontAwesome5 name='autoprefixer' size={focused? 20 : 15} color={focused? '#ffb6c1':'#999'}/>
+            )
+          }}
         />
-        <Tab.Screen
+        <Drawer.Screen
           name="Screen_B"
           component = {ScreenB}
         />
 
         
-      </Tab.Navigator>
-
+      </Drawer.Navigator>
     </NavigationContainer>
   )
 }
