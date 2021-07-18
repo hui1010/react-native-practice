@@ -21,14 +21,14 @@ function  App() {
   return (
     <NavigationContainer>
       <Tab.Navigator
-        screenOptions={(route) =>({
-          tabBarIcon: (focused, size, color) => {
+        screenOptions={({route}) =>({
+          tabBarIcon: ({focused, size, color}) => {
             let iconName 
             if(route.name === "Screen_A") {
               iconName='autoprefixer'
               // size = focused ? 25 : 20
               // color = focused ? '#f8f' : '#555'
-            } else {
+            } else if (route.name === "Screen_B") {
               iconName='btc'
               // size = foused? 25 : 20
               // color = focused ? '#f8f' : '#555'
