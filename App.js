@@ -24,7 +24,6 @@ function  App() {
         screenOptions={(route) =>({
           tabBarIcon: (focused, size, color) => {
             let iconName 
-            const name = route.name
             if(route.name === "Screen_A") {
               iconName='autoprefixer'
               // size = focused ? 25 : 20
