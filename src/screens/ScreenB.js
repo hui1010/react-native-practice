@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { StyleSheet, View, Text, Pressable } from 'react-native';
 
+import GlobalStyle from '../utils/GlobalStyle';
+
 function ScreenB({navigation}) {
 
     const onPressHandler = () => {
@@ -15,7 +17,7 @@ function ScreenB({navigation}) {
           style={({pressed}) => ({backgroundColor: pressed? '#ddd':"#0f0"})}
           onPress={onPressHandler}
         >
-          <Text>Go to screen A</Text>
+          <Text style={GlobalStyle.customFont} >Go to screen A</Text>
         </Pressable>
       </View>
     )
