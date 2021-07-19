@@ -9,8 +9,8 @@ import { createMaterialTopTabNavigator } from '@react-navigation/material-top-ta
 
 import { FontAwesome5 } from '@expo/vector-icons'
 
-import ScreenA from './src/ScreenA'
-import ScreenB from './src/ScreenB'
+import ScreenA from './src/screens/ScreenA'
+import ScreenB from './src/screens/ScreenB'
 
 const Tab = createBottomTabNavigator()
 // const Tab = createMaterialBottomTabNavigator()
