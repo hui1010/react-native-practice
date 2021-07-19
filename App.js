@@ -3,73 +3,45 @@ import React, { useState } from 'react';
 import { StyleSheet, View, Text, Pressable, SafeAreaView } from 'react-native';
 import { NavigationContainer  } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
-import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
+
 
 import { FontAwesome5 } from '@expo/vector-icons'
 
-import ScreenA from './src/screens/ScreenA'
-import ScreenB from './src/screens/ScreenB'
+import Home from './src/screens/Home'
+import Login from './src/screens/Login'
 
-const Tab = createBottomTabNavigator()
-// const Tab = createMaterialBottomTabNavigator()
-// const Tab = createMaterialTopTabNavigator()
+const Stack = createStackNavigator()
 
 function  App() {
 
   return (
     <NavigationContainer>
-      <Tab.Navigator
-        screenOptions={({route}) =>({
-          tabBarIcon: ({focused, size, color}) => {
-            let iconName 
-            if(route.name === "Screen_A") {
-              iconName='autoprefixer'
-              // size = focused ? 25 : 20
-              // color = focused ? '#f8f' : '#555'
-            } else if (route.name === "Screen_B") {
-              iconName='btc'
-              // size = foused? 25 : 20
-              // color = focused ? '#f8f' : '#555'
-            } 
-            return (
-              <FontAwesome5 
-                name={iconName}
-                // size={size}
-                // color={color}
-              />
-            )
+      <Stack.Navigator
+        screenOptions={{
+          initialRouteName: "Login",
+          headerTitleAlign: 'center',
+          headerStyle: {
+            backgroundColor: '#00F'
+          },
+          headerTintColor: '#FFF',
+          headerTitleStyle: {
+            fontSize: 25,
+            fontWeight: 'bold'
           }
-        })}
-        tabBarOptions={{
-          activeTintColor:'#f8f',
-          inactiveTintColor: '#555',
-          activeBackgroundColor: '#fff',
-          inactiveBackgroundColor: '#999',
-          // showLabel: false, //the name
-          labelStyle: {fontSize: 14},
-          showIcon: true
         }}
-
-        //For material bottom tab bars
-        activeColor= '#f8edf6' //name's color, not icon's color
-        inactiveColor= '#3e2465'
-        barStyle={{backgroundColor: '#694fad'}} // the whole bar
       >
-        <Tab.Screen
-          name="Screen_A"
-          component = {ScreenA}
-          options={{tabBarBadge: 3}}
+        <Stack.Screen
+          name="Login"
+          component = {Login}
+          options={{
+            headerShown: false,
+          }}
         />
-        <Tab.Screen
-          name="Screen_B"
-          component = {ScreenB}
-        />
-
-        
-      </Tab.Navigator>
-
+        <Stack.Screen
+          name="Home"
+          component = {Home}
+        />       
+      </Stack.Navigator>
     </NavigationContainer>
   )
 }
