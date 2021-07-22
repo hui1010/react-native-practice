@@ -1,16 +1,16 @@
 import React, { useState, useEffect } from 'react';
-import { StyleSheet, View, Text, Alert, TextInput } from 'react-native';
+import { StyleSheet, View, Text, Alert, TextInput, FlatList } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import GlobalStyle from '../utils/GlobalStyle';
 
 import { useSelector, useDispatch } from 'react-redux'
-import { setName, setAge, increaseAge } from '../redux/actions'
+import { setName, setAge, increaseAge, getCities } from '../redux/actions'
 
 import CustomButton from '../utils/CustomButton'
 
 function Home({navigation, route}) {
 
-  const { name, age } = useSelector(state=>state.userReducer)
+  const { name, age, cities } = useSelector(state=>state.userReducer)
   const dispatch = useDispatch()
 
   // const [name, setName] = useState('')
@@ -18,6 +18,7 @@ function Home({navigation, route}) {
 
   useEffect(()=>{
     getData()
+    dispatch(getCities())
   }, [])
 
   const getData = () => {
@@ -74,10 +75,21 @@ const removeData = async () => {
     <View style={styles.body}>
       <Text style={[GlobalStyle.customFont, styles.text]}>Welcome {age} years old {name}!</Text>
 
-      <TextInput style={styles.input} placeholder='Enter your name' value={name} onChangeText={(val)=>dispatch(setName(val))}/>
+      {/* <TextInput style={styles.input} placeholder='Enter your name' value={name} onChangeText={(val)=>dispatch(setName(val))}/>
       <CustomButton title='Save' color='#ff7f00' onPressFunction={updateData}/>
       <CustomButton title='Delete' color='#f40100' onPressFunction={removeData}/>
-      <CustomButton title='Increase Age' color='#0080ff' onPressFunction={()=>dispatch(increaseAge())}/>
+      <CustomButton title='Increase Age' color='#0080ff' onPressFunction={()=>dispatch(increaseAge())}/> */}
+
+      <FlatList
+        keyExtractor={(item, index)=>index.toString()}
+        data={cities}
+        renderItem={({item})=>(
+          <View>
+            <Text>{item.country}</Text>
+            <Text>{item.city}</Text>
+          </View>
+        )}
+      />
     </View>
   )
 }
