@@ -2,12 +2,19 @@ import React, { useState, useEffect } from 'react'
 import { View, Text, StyleSheet, Image, TextInput, Keyboard, TouchableWithoutFeedback, Alert } from 'react-native'
 import AsyncStorage from '@react-native-async-storage/async-storage'
 
+import { useSelector, useDispatch } from 'react-redux'
+import { setName, setAge } from '../redux/actions'
+
 import CustomButton from '../utils/CustomButton'
 
 export default function Login({navigation}) {
 
-    const [name, setName] = useState('')
-    const [age, setAge] = useState('')
+    //With reduc
+    const { name, age } = useSelector(state=>state.userReducer)
+    const dispatch = useDispatch()
+
+    // const [name, setName] = useState('')
+    // const [age, setAge] = useState('')
 
     useEffect(()=>{
         getData()
@@ -34,6 +41,8 @@ export default function Login({navigation}) {
         if(name.length == 0 || age.length == 0) {
             Alert.alert('Warning!', 'Please write your info')
         } else {
+            dispatch(setName(name))
+            dispatch(setAge(age))
             try {
                 var user = {
                     Name: name,
@@ -53,11 +62,11 @@ export default function Login({navigation}) {
             <View style={styles.body}>
                 <Image 
                     style={styles.logo}
-                    source={require('../../assets/done.jpg')}
+                    source={require('../../assets/redux.jpg')}
                 />
-                <Text style={styles.text}>Async Storage</Text>
-                <TextInput style={styles.input} placeholder='Enter your name' onChangeText={(val)=>setName(val)}/>
-                <TextInput style={styles.input} placeholder='Enter your age' onChangeText={(val)=>setAge(val)}/>
+                <Text style={styles.text}>Redux</Text>
+                <TextInput style={styles.input} placeholder='Enter your name' onChangeText={(val)=>dispatch(setName(val))}/>
+                <TextInput style={styles.input} placeholder='Enter your age' onChangeText={(val)=>dispatch(setAge(val))}/>
                 <CustomButton title='Login' color='#1eb900' onPressFunction={setData}/>
             </View>
         </TouchableWithoutFeedback>

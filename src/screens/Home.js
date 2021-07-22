@@ -3,12 +3,18 @@ import { StyleSheet, View, Text, Alert, TextInput } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import GlobalStyle from '../utils/GlobalStyle';
 
+import { useSelector, useDispatch } from 'react-redux'
+import { setName, setAge, increaseAge } from '../redux/actions'
+
 import CustomButton from '../utils/CustomButton'
 
 function Home({navigation, route}) {
 
-  const [name, setName] = useState('')
-  const [age, setAge] = useState('')
+  const { name, age } = useSelector(state=>state.userReducer)
+  const dispatch = useDispatch()
+
+  // const [name, setName] = useState('')
+  // const [age, setAge] = useState('')
 
   useEffect(()=>{
     getData()
@@ -22,8 +28,8 @@ function Home({navigation, route}) {
           value => {
             if(value != null) {
               let user = JSON.parse(value)
-              setName(user.Name)
-              setAge(user.Age)
+              dispatch(setName(user.Name))
+              dispatch(setAge(user.Age))
             }
           }
         )
@@ -68,9 +74,10 @@ const removeData = async () => {
     <View style={styles.body}>
       <Text style={[GlobalStyle.customFont, styles.text]}>Welcome {age} years old {name}!</Text>
 
-      <TextInput style={styles.input} placeholder='Enter your name' value={name} onChangeText={(val)=>setName(val)}/>
+      <TextInput style={styles.input} placeholder='Enter your name' value={name} onChangeText={(val)=>dispatch(setName(val))}/>
       <CustomButton title='Save' color='#ff7f00' onPressFunction={updateData}/>
       <CustomButton title='Delete' color='#f40100' onPressFunction={removeData}/>
+      <CustomButton title='Increase Age' color='#0080ff' onPressFunction={()=>dispatch(increaseAge())}/>
     </View>
   )
 }

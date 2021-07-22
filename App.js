@@ -4,6 +4,9 @@ import { StyleSheet, View, Text, Pressable, SafeAreaView } from 'react-native';
 import { NavigationContainer  } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 
+import { Provider } from 'react-redux';
+import { Store } from './src/redux/store';
+
 
 import { FontAwesome5 } from '@expo/vector-icons'
 
@@ -15,7 +18,8 @@ const Stack = createStackNavigator()
 function  App() {
 
   return (
-    <NavigationContainer>
+    <Provider store={Store}>
+      <NavigationContainer>
       <Stack.Navigator
         screenOptions={{
           initialRouteName: "Login",
@@ -43,6 +47,7 @@ function  App() {
         />       
       </Stack.Navigator>
     </NavigationContainer>
+    </Provider>
   )
 }
 
