@@ -12,6 +12,7 @@ import { FontAwesome5 } from '@expo/vector-icons'
 
 import Home from './src/screens/Home'
 import Login from './src/screens/Login'
+import Map from './src/screens/Map'
 
 const Stack = createStackNavigator()
 
@@ -20,33 +21,37 @@ function  App() {
   return (
     <Provider store={Store}>
       <NavigationContainer>
-      <Stack.Navigator
-        screenOptions={{
-          initialRouteName: "Login",
-          headerTitleAlign: 'center',
-          headerStyle: {
-            backgroundColor: '#00F'
-          },
-          headerTintColor: '#FFF',
-          headerTitleStyle: {
-            fontSize: 25,
-            fontWeight: 'bold'
-          }
-        }}
-      >
-        <Stack.Screen
-          name="Login"
-          component = {Login}
-          options={{
-            headerShown: false,
+        <Stack.Navigator
+          screenOptions={{
+            initialRouteName: "Login",
+            headerTitleAlign: 'center',
+            headerStyle: {
+              backgroundColor: '#00F'
+            },
+            headerTintColor: '#FFF',
+            headerTitleStyle: {
+              fontSize: 25,
+              fontWeight: 'bold'
+            }
           }}
-        />
-        <Stack.Screen
-          name="Home"
-          component = {Home}
-        />       
-      </Stack.Navigator>
-    </NavigationContainer>
+        >
+          <Stack.Screen
+            name="Login"
+            component = {Login}
+            options={{
+              headerShown: false,
+            }}
+          />
+          <Stack.Screen
+            name="Home"
+            component = {Home}
+          />       
+          <Stack.Screen
+            name="Map"
+            component = {Map}
+          />       
+        </Stack.Navigator>
+      </NavigationContainer>
     </Provider>
   )
 }

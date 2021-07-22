@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { StyleSheet, View, Text, Alert, TextInput, FlatList } from 'react-native';
+import { StyleSheet, View, Text, Alert, TextInput, FlatList, TouchableOpacity } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import GlobalStyle from '../utils/GlobalStyle';
 
@@ -84,10 +84,18 @@ const removeData = async () => {
         keyExtractor={(item, index)=>index.toString()}
         data={cities}
         renderItem={({item})=>(
-          <View style={styles.item}>
-            <Text style={styles.title}>{item.country}</Text>
-            <Text style={styles.subtitle}>{item.city}</Text>
-          </View>
+          <TouchableOpacity
+            onPress={()=>{
+              navigation.navigate('Map', {
+                city: item.city
+              })
+            }}
+          >
+            <View style={styles.item}>
+              <Text style={styles.title}>{item.country}</Text>
+              <Text style={styles.subtitle}>{item.city}</Text>
+            </View>
+          </TouchableOpacity>
         )}
       />
     </View>
