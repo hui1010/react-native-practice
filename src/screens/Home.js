@@ -84,9 +84,9 @@ const removeData = async () => {
         keyExtractor={(item, index)=>index.toString()}
         data={cities}
         renderItem={({item})=>(
-          <View>
-            <Text>{item.country}</Text>
-            <Text>{item.city}</Text>
+          <View style={styles.item}>
+            <Text style={styles.title}>{item.country}</Text>
+            <Text style={styles.subtitle}>{item.city}</Text>
           </View>
         )}
       />
@@ -115,6 +115,25 @@ const styles = StyleSheet.create({
     fontSize: 20,
     marginTop: 70,
     marginBottom: 10,
+  },
+  item: {
+    backgroundColor: '#fff',
+    borderWidth: 2,
+    borderColor: '#ccc',
+    borderRadius: 5,
+    margin: 7,
+    width: 350,
+    justifyContent: 'center',
+    alignItems: 'center'
+  },
+  title: {
+    fontSize: 30,
+    margin: 10
+  }, 
+  subtitle: {
+    fontSize: 20,
+    margin: 10,
+    color: '#999'
   }
 })
 
